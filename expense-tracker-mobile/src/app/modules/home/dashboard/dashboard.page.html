@@ -1,0 +1,134 @@
+<ion-header class="no-border">
+  <ion-toolbar>
+    <!-- <ion-title>{{'dashboard.title' | localizedresource | async}}</ion-title> -->
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <div class="date-filters">
+      <div class="filter-item">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <ion-datetime 
+          [displayFormat]="DEFAULT_DATE_FORMAT" [value]="selectedFromDate"  
+            (ionChange)="onDateSelectionChanged($event, 'fromDate')"></ion-datetime>
+      </div>
+      <div class="filter-item-separator">-</div>
+      <div class="filter-item">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <ion-datetime [value]="selectedToDate" [displayFormat]="DEFAULT_DATE_FORMAT" 
+        (ionChange)="onDateSelectionChanged($event, 'toDate')"></ion-datetime>
+      </div>
+    </div>
+    <!-- only here to center the date filters-->
+    <ion-buttons slot="end" style="visibility: hidden;">
+      <ion-button>
+        <ion-icon slot="icon-only" name="more"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="card-total">
+    <div class="total-with-chart">
+      <div class="total-container">
+        <div class="total-label">{{'expense.total' | localizedresource | async }}</div>
+        <ion-label *ngIf="totalAmount" [innerHTML]="totalAmount | formateCurrency | async"></ion-label>
+      </div>
+      <div class="total-chart-container" [class.skeleton-loading]="!totalChartOptions">
+        <apx-chart *ngIf="totalChartOptions" 
+          [series]="totalChartOptions.series"
+          [chart]="totalChartOptions.chart"
+          [xaxis]="totalChartOptions.xaxis"
+          [yaxis]="totalChartOptions.yaxis"
+          [dataLabels]="totalChartOptions.dataLabels"
+          [grid]="totalChartOptions.grid"
+          [stroke]="totalChartOptions.stroke"
+          [title]="totalChartOptions.title"
+          [legend]="totalChartOptions.legend"
+      ></apx-chart>
+      </div>
+    </div>
+  </div>
+  <ion-card class="card-today">
+    <ion-card-content [class.skeleton-loading]="!todayExpenses">
+      <div class="today-header"> 
+        <div class="today-info">
+          <div class="date">{{ todayDate | formateDate: 'D' | async }}</div>
+          <div class="full-date">
+            <div class="day">{{'expense.today' | localizedresource | async}}</div>
+            <div class="month-year">{{ todayDate | formateDate: 'MM' | async }}&nbsp;{{ todayDate | formateDate: 'YYYY' | async }}</div>
+          </div>
+        </div>
+        <div class="today-total" [innerHTML]="totalAmountToday | formateCurrency | async"></div>
+      </div>
+      <no-data *ngIf="todayExpenses && !todayExpenses.length"></no-data>
+      <ion-list *ngIf="todayExpenses && todayExpenses.length">
+        <ng-container *ngFor="let item of todayExpenses">
+          <div class="expense-item">
+            <div class="icon-container">
+              <ion-icon [attr.name]="item.category.icon" 
+                *ngIf="!item.markedForAdd && !item.markedForUpdate && !item.markedForDelete"></ion-icon>
+              <ion-icon name="refresh" class="animated infinite spin" 
+                *ngIf="item.markedForAdd || item.markedForUpdate || item.markedForDelete"></ion-icon>
+            </div>
+            <div class="category-description-amount">
+              <div class="category-description">
+                <div class="description">{{item.description | slice:0:40 }}{{item.description.length > 40 ? '...' : ''}}</div>
+              </div>
+              <div class="amount-date">
+                <div class="amount" [innerHTML]="item | expenseamount | async"></div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </ion-list>
+      <ion-button shape="round" class="button-custom button-viewall" 
+        (click)="onViewAllExpensesClicked()">
+        {{ 'common.viewall' | localizedresource | async }}
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+  <ion-card class="card-date-spending">
+    <ion-card-header>
+      <ion-card-title>{{'home.dashboard.spending_by_date' | localizedresource | async }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content [class.skeleton-loading]="!dateChartOptions">
+      <apx-chart #dateChart *ngIf="dateChartOptions" 
+      [series]="dateChartOptions.series"
+      [chart]="dateChartOptions.chart"
+      [dataLabels]="dateChartOptions.dataLabels"
+      [plotOptions]="dateChartOptions.plotOptions"
+      [xaxis]="dateChartOptions.xaxis"
+    ></apx-chart>
+    </ion-card-content>
+  </ion-card>
+  <ion-card class="card-category-spending">
+    <ion-card-header>
+      <ion-card-title>{{'home.dashboard.spending_by_category' | localizedresource | async }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content [class.skeleton-loading]="!categoryChartOptions">
+      <apx-chart #categoryChart *ngIf="categoryChartOptions" 
+      [series]="categoryChartOptions.series"
+      [chart]="categoryChartOptions.chart"
+      [legend]="categoryChartOptions.legend"
+      [labels]="categoryChartOptions.labels"
+    ></apx-chart>
+    </ion-card-content>
+  </ion-card>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button (click)="onAddClick('expense')">
+        <ion-icon ios="expense" md="expense"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button (click)="onAddClick('group')">
+        <ion-icon ios="group" md="group"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

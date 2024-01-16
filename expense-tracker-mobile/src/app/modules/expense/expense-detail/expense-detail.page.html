@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ expense?.description }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="onMoreOptionsClicked($event)">
+        <ion-icon slot="icon-only" name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div class="info">
+      <div class="category" *ngIf="expense?.category">
+        <div class="category-icon-name">
+          <div class="category-icon"><ion-icon [attr.ios]="expense.category.icon" [attr.md]="expense.category.icon"></ion-icon></div>
+          <div class="category-name">{{ expense.category.name }}</div>
+        </div>
+      </div>
+      <div class="amount-info">
+        <div class="amount" [innerHTML]="expense?.amount | formateCurrency | async"></div>
+        <div class="by">
+          {{'expense.added_by' | localizedresource | async}}&nbsp;{{ expense?.createdByName }}&nbsp;{{'common.on' | localizedresource | async}}&nbsp;<strong>{{expense?.createdOn | formateDate | async}}</strong>
+        </div>
+        <div class="by" *ngIf="expense?.updatedOn">
+          {{'expense.updated_by' | localizedresource | async}}&nbsp;{{ expense?.updatedByName }}&nbsp;{{'common.on' | localizedresource | async}}&nbsp;<strong>{{expense?.updatedOn | formateDate | async}}</strong>
+        </div>
+      </div>
+    </div>
+    <ion-list class="description" *ngIf="expense?.description">
+      <ion-item-divider>
+        {{'expense.description' | localizedresource | async}}
+      </ion-item-divider>
+      <ion-item>
+        <ion-label class="ion-text-wrap">{{ expense.description }}</ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-list class="transactions-detail" *ngIf="expense?.transactions.length">
+      <ion-item-divider>
+        {{'expense.detail' | localizedresource | async}}
+      </ion-item-divider>
+      <ion-item *ngFor="let tran of expense.transactions">
+        <ion-icon slot="start" name="person"></ion-icon>
+        <ion-label class="ion-text-wrap" [innerHtml]="tran['text'] | safe: 'html'"></ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-list class="notes" *ngIf="expense?.notes">
+      <ion-item-divider>
+        {{'expense.notes' | localizedresource | async}}
+      </ion-item-divider>
+      <ion-item>
+        <ion-label class="ion-text-wrap">{{ expense.notes }}</ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-list class="attachment" *ngIf="expense?.attachment">
+      <ion-item-divider>
+        {{'expense.attachment' | localizedresource | async}}
+      </ion-item-divider>
+      <ion-button fill="clear" (click)="onAttachmentClicked(expense)">
+        <ion-icon name="document-outline" *ngIf="!expense.attachment.contentType.startsWith('image')"></ion-icon>
+        <ion-icon name="image-outline" *ngIf="expense.attachment.contentType.startsWith('image')"></ion-icon>
+      </ion-button>
+    </ion-list>
+  </div>
+</ion-content>

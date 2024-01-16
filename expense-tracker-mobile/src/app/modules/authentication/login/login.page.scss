@@ -1,0 +1,64 @@
+page-auth-login {
+    background-image: url('/assets/images/login.png');
+    background-repeat: no-repeat;
+    background-size: 50%; 
+    background-position: top left;
+
+    ion-content {
+        --background: transparent;
+        --overflow: hidden;
+
+        // &:after {
+        //     clip-path: ellipse(100% 60% at 15% 25%);
+        //     background: #000;
+        //     content: "";
+        //     height: 100%;
+        //     width: 100%;
+        //     background: linear-gradient(147deg, var(--ion-color-primary-shade), var(--ion-color-primary));
+        //     position: absolute;
+        //     top: -44px;
+        //     z-index: -1;
+        // }
+
+        .container {
+            .social-media-container {
+                position: absolute;
+                width: 100%;
+                text-align: center;
+                bottom: 10px;
+                left: 0;
+                right: 0;
+                margin: auto;
+
+                .continue-with {
+                    margin-bottom: 5px;
+                }
+
+                .social-media-buttons {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    ion-button {
+                        width: 40px;
+                        height: 40px;
+                    }
+                }
+            }
+
+            .other-buttons {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                margin-top: 20px;
+
+                ion-button {
+                    font-size: 0.8em;
+                    --padding-start: 5px;
+                    --padding-end: 5px;
+                }
+            }
+        }
+    }
+}

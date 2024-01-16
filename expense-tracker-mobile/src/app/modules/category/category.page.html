@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{'category.title' | localizedresource | async}}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button *ngIf="!isOpenedAsModal"></ion-back-button>
+      <ion-button (click)="onCloseModalClicked(null)" *ngIf="isOpenedAsModal">
+        <ion-icon name="close" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar debounce="500" (ionInput)="onIonSearchInput($event)"></ion-searchbar>
+  <ion-list *ngFor="let item of gorupedItems | keyvalue">
+    <ion-item-divider>
+      <ion-label>{{ item.key }}</ion-label>
+    </ion-item-divider>
+    <ion-item *ngFor="let cat of item.value" (click)="onCategoryClicked(cat)">
+      <ion-icon slot="start" [name]="cat.icon"></ion-icon>
+      <ion-label>{{ cat.name }}</ion-label>
+      <ion-button fill="clear" slot="end" 
+        (click)="onMoreOptionsButtonClicked($event, cat)" *ngIf="!isOpenedAsModal">
+        <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="!isOpenedAsModal">
+    <ion-fab-button (click)="onCategoryAddClick()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

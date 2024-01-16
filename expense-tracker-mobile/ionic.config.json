@@ -1,0 +1,14 @@
+{
+  "name": "expense-tracker",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "plugins": {
+    "SplashScreen": {
+      "showSpinner": true,
+      "splashFullScreen": true,
+      "splashImmersive": true
+    }
+  }
+}

@@ -1,0 +1,142 @@
+{
+    "common": {
+        "success": "Success",
+        "failed": "Failed",
+        "dismiss": "Dismiss",
+        "ok": "OK",
+        "edit": "Edit",
+        "delete": "Delete",
+        "delete_force": "Force Delete",
+        "cancel": "Cancel",
+        "yes": "Yes",
+        "no": "No",
+        "update": "Update",
+        "clear": "Clear",
+        "reset": "Reset",
+        "select": "[ Select ]",
+        "areyousure": "Are you sure ?",
+        "version": "Version",
+        "nodata": "No data found",
+        "viewall": "View all",
+        "you": "You",
+        "on": "on"
+    },
+    "category": {
+        "title": "Category",
+        "name": "Name",
+        "groupName": "Group Name",
+        "icon": "Icon"
+    },
+    "expense": {
+        "title": "Expense",
+        "title_listing": "Expenses",
+        "detail": "Details",
+        "non_group": "Non-group expenses",
+        "add": "Add expense",
+        "description": "Description",
+        "amount": "Amount",
+        "date": "Date",
+        "notes": "Notes",
+        "today": "Today",
+        "total": "Total",
+        "attachment": "Attachment",
+        "split": "How was this expense split?",
+        "amount_sum_must_same": "Entered amount must be same as total amount",
+        "debit": "Debit",
+        "credit": "Credit",
+        "total_owe": "Total you owe",
+        "total_theyowe": "Total they owe",
+        "added_by": "Added by",
+        "added_on": "Added on",
+        "updated_by": "Updated by",
+        "updated_on": "Updated on",
+        "transaction_text_paidby": "<strong>{0}</strong> paid <strong>{1}</strong> and owes <strong>{2}</strong>",
+        "transaction_text_owes": "<strong>{0}</strong> owes <strong>{1}</strong>",
+        "transaction_type": {
+            "10": "Paid by you and split equally",
+            "20": "You owe full amount",
+            "30": "They owe full amount",
+            "40": "Paid by other person and split equally",
+            "50": "Multiple"
+        }
+    },
+    "group": {
+        "title": "Group",
+        "add": "Add group",
+        "name": "Name",
+        "add_member": "Add member",
+        "settle_up": "Settle up",
+        "settled": "You are settled up",
+        "members": "Members",
+        "accept_request": "Do you accept to join \"{0}\" group?",
+        "owner": "Owner",
+        "member_not_found": "Member not found",
+        "not_an_owner": "Only owner of this group can add members",
+        "not_found": "Group not found",
+        "already_member": "\"{0}\" is already a member of \"{1}\" group",
+        "total_you_paid": "Total you paid",
+        "total_balance": "Total balance",
+        "your_expenses": "Your expenses",
+        "expenses_must_sync": "All expenses must be synced before settling up",
+        "status": {
+            "approved": "Approved",
+            "pending": "Pending",
+            "rejected": "Rejected"
+        }
+    },
+    "home": {
+        "title": "Home",
+        "dashboard": {
+            "spending_by_category": "Spendings by Top 10 categories",
+            "spending_by_date": "Spendings by date"
+        }
+    },
+    "setting": {
+        "title": "Setting",
+        "database": "Database",
+        "delete_db": "Delete Database",
+        "table": "Table"
+    },
+    "search": {
+        "title": "Search"    
+    },
+    "user": {
+        "logout": "Logout",
+        "profile": "Profile",
+        "email": "Email",
+        "password": "Password",
+        "confirm_password": "Confirm password",
+        "change_password": "Change password",
+        "mobile": "Mobile",
+        "name": "Name",
+        "forgot_password": "Forgot Password?",
+        "already_exist": "User already exist",
+        "already_registered_normal_auth": "You are alredy registered using normal authentication",
+        "cannot_register": "We cannot register your account. Your account status is \"{0}\"",
+        "users": "Users",
+        "external_auth": "External Authentication",
+        "login": {
+            "title": "Login",
+            "continue_with": "Or continue with"
+        },
+        "register": {
+            "title": "Register"
+        },
+        "status": {
+            "title": "Status",
+            "approved": "Approved",
+            "pending": "Pending",
+            "rejected": "Rejected",
+            "blocked": "Blocked"
+        },
+        "role": {
+            "title": "Role",
+            "admin": "Admin",
+            "user": "User"
+        }
+    },
+    "currency": {
+        "default": "Default currency",
+        "title": "Currency"
+    }
+}

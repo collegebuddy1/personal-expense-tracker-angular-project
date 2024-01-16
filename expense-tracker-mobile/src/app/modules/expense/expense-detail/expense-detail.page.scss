@@ -1,0 +1,66 @@
+page-expense-detail {
+    ion-header {
+        ion-toolbar {
+            // --min-height: 112px;
+        }
+    }
+
+    ion-content {
+        .container {
+            .info {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: var(--ion-padding, 16px);
+
+                .category {
+                    width: 80px;
+                    text-align: center;
+
+                    .category-icon-name {
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+
+                        .category-icon {
+                            font-size: 28px;
+                        }
+
+                        .category-name {
+                            font-size: 0.6em;
+                        }
+                    }
+                }
+
+                .amount-info {
+                    width: calc(100% - 80px);
+
+                    .amount {
+                        font-size: 1.3em;
+                        font-weight: bold;
+                    }
+
+                    .date, .by {
+                        margin-top: 2px;
+                        font-size: 0.7em;
+                    }
+                }
+            }
+
+            .transactions-detail {
+
+            }
+
+            .description {
+                margin-top: 10px;
+            }
+
+            .attachment {
+                ion-button {
+                    font-size: 80px;
+                    height: auto;
+                }
+            }
+        }
+    }
+}
